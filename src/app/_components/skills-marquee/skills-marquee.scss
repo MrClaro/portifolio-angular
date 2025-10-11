@@ -1,0 +1,38 @@
+.skills-marquee-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0;
+  white-space: nowrap;
+}
+
+.skills-marquee {
+  display: inline-block;
+  animation: marquee-scroll 30s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+
+  i {
+    color: #38023b;
+    font-size: 40px;
+    margin: 0 30px;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
