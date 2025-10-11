@@ -1,0 +1,21 @@
+<mat-toolbar>
+  <div class="navbar-container">
+    <a class="logo" routerLink="/">
+      <img src="./logo.svg" alt="Logotipo da página" />
+    </a>
+
+    <span class="spacer-toolbar"></span>
+
+    <nav class="main-links">
+      <a mat-button routerLink="/sobre-mim">Sobre mim</a>
+      <a mat-button routerLink="/portfolio">Projetos</a>
+      <a mat-button routerLink="/blog">Blog</a>
+    </nav>
+
+    <div class="lang-selector">
+      <button mat-flat-button color="accent" type="button">PT</button>
+      <span class="separator">|</span>
+      <button mat-button type="button">EN</button>
+    </div>
+  </div>
+</mat-toolbar>

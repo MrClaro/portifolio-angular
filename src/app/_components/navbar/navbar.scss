@@ -1,0 +1,341 @@
+/* Toolbar principal */
+mat-toolbar {
+  background: transparent;
+  backdrop-filter: blur(10px);
+  color: #090c02;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  height: auto;
+  min-height: 80px;
+  padding: 0;
+}
+
+mat-toolbar:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Container da navbar */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  gap: 24px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.logo img {
+  height: 80px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+/* Spacer */
+.spacer-toolbar {
+  flex: 1 1 auto;
+}
+
+/* Navegação principal */
+.main-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.main-links a {
+  position: relative;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  padding: 8px 20px !important;
+}
+
+.main-links a::before {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
+.main-links a:hover::before,
+.main-links a.active::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.main-links a:hover {
+  transform: translateY(-1px);
+}
+
+.main-links a.active {
+  font-weight: 600;
+}
+
+/* Seletor de idioma */
+.lang-selector {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(9, 12, 2, 0.06), rgba(9, 12, 2, 0.08));
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.lang-selector::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(9, 12, 2, 0.1), rgba(9, 12, 2, 0.05));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.lang-selector:hover {
+  background: linear-gradient(135deg, rgba(9, 12, 2, 0.08), rgba(9, 12, 2, 0.1));
+  box-shadow:
+    inset 0 1px 4px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.lang-selector button {
+  min-width: 52px !important;
+  height: 40px !important;
+  padding: 8px 18px !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.lang-selector button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.4s ease,
+    height 0.4s ease;
+}
+
+.lang-selector button:active::before {
+  width: 100px;
+  height: 100px;
+}
+
+/* Botão de idioma ativo (accent) */
+.lang-selector button[color='accent'] {
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.18),
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.lang-selector button[color='accent']:hover {
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.22),
+    0 2px 5px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: scale(1.08) translateY(-2px);
+}
+
+/* Botão de idioma inativo */
+.lang-selector button:not([color='accent']) {
+  opacity: 0.6;
+  background: transparent !important;
+  color: #090c02 !important;
+}
+
+.lang-selector button:not([color='accent']):hover {
+  background: rgba(9, 12, 2, 0.1) !important;
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* Separador */
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2px;
+  height: 28px;
+  margin: 0 8px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(9, 12, 2, 0.4) 20%,
+    rgba(9, 12, 2, 0.6) 50%,
+    rgba(9, 12, 2, 0.4) 80%,
+    transparent
+  );
+  position: relative;
+  user-select: none;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(9, 12, 2, 0.3);
+}
+
+.separator::before {
+  top: -2px;
+}
+
+.separator::after {
+  bottom: -2px;
+}
+
+.separator:hover {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(9, 12, 2, 0.5) 20%,
+    rgba(9, 12, 2, 0.7) 50%,
+    rgba(9, 12, 2, 0.5) 80%,
+    transparent
+  );
+}
+
+/* Responsividade - Tablet */
+@media (max-width: 968px) {
+  .navbar-container {
+    padding: 0 24px;
+    gap: 16px;
+  }
+
+  .main-links {
+    gap: 2px;
+  }
+
+  .main-links a {
+    padding: 8px 16px !important;
+    font-size: 14px;
+  }
+}
+
+/* Responsividade - Mobile */
+@media (max-width: 768px) {
+  mat-toolbar {
+    min-height: 64px;
+  }
+
+  .navbar-container {
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .logo img {
+    height: 60px;
+  }
+
+  .main-links {
+    display: none;
+  }
+
+  .lang-selector {
+    padding: 5px;
+    gap: 1px;
+  }
+
+  .lang-selector button {
+    min-width: 44px !important;
+    height: 36px !important;
+    padding: 6px 14px !important;
+    font-size: 14px !important;
+  }
+
+  .separator {
+    height: 24px;
+    margin: 0 6px;
+  }
+
+  .separator::before,
+  .separator::after {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* Responsividade - Mobile pequeno */
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 12px;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  .lang-selector button {
+    padding: 5px 12px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* Animação de entrada */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+mat-toolbar {
+  animation: fadeInDown 0.4s ease-out;
+}
