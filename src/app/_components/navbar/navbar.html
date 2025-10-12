@@ -1,21 +1,56 @@
-<mat-toolbar>
+<mat-toolbar [class.navbar-hidden]="!isNavbarVisible">
   <div class="navbar-container">
     <a class="logo" routerLink="/">
       <img src="./logo.svg" alt="Logotipo da página" />
     </a>
-
     <span class="spacer-toolbar"></span>
-
+    <!-- Links desktop -->
     <nav class="main-links">
-      <a mat-button routerLink="/sobre-mim">Sobre mim</a>
-      <a mat-button routerLink="/portfolio">Projetos</a>
-      <a mat-button routerLink="/blog">Blog</a>
+      <a mat-button routerLink="/sobre-mim" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        Sobre mim
+      </a>
+      <a mat-button routerLink="/portfolio" routerLinkActive="active">
+        <mat-icon>work</mat-icon>
+        Projetos
+      </a>
+      <a mat-button routerLink="/blog" routerLinkActive="active">
+        <mat-icon>article</mat-icon>
+        Blog
+      </a>
     </nav>
-
+    <!-- Menu Hamburger (mobile) -->
+    <button
+      class="hamburger-menu"
+      mat-icon-button
+      (click)="toggleMenu()"
+      [class.active]="isMenuOpen"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <!-- Seletor de idioma -->
     <div class="lang-selector">
       <button mat-flat-button color="accent" type="button">PT</button>
-      <span class="separator">|</span>
+      <span class="separator"></span>
       <button mat-button type="button">EN</button>
     </div>
   </div>
 </mat-toolbar>
+<div class="mobile-menu-overlay" [class.open]="isMenuOpen" (click)="closeMenu()">
+  <nav class="mobile-menu" (click)="$event.stopPropagation()">
+    <a mat-button routerLink="/sobre-mim" routerLinkActive="active" (click)="closeMenu()">
+      <mat-icon>person</mat-icon>
+      Sobre mim
+    </a>
+    <a mat-button routerLink="/portfolio" routerLinkActive="active" (click)="closeMenu()">
+      <mat-icon>work</mat-icon>
+      Projetos
+    </a>
+    <a mat-button routerLink="/blog" routerLinkActive="active" (click)="closeMenu()">
+      <mat-icon>article</mat-icon>
+      Blog
+    </a>
+  </nav>
+</div>
