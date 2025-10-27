@@ -2,6 +2,14 @@
   <div class="project-content">
     <h2 class="content-title">{{ project.title }}</h2>
     <p class="content-text">{{ project.content }}</p>
+    <div class="stack-technologies">
+      @for (tech of project.technologies; track tech) {
+        <div class="technology-item">
+          <i [class]="getTechnologyIcon(tech)"></i>
+          <p class="technologie-name">{{ tech }}</p>
+        </div>
+      }
+    </div>
     <div class="content-resources">
       @for (resource of project.resources; track resource.url) {
         <button mat-flat-button class="resource-btn" (click)="openUrl(resource.url)">
