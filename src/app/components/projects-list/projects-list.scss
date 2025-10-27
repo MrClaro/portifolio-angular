@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $primary-color: #fafafa;
 $black-absolute: #0d0d0d;
 $red-fire: #cc0000;
@@ -11,7 +13,7 @@ $shadow-red: rgba($red-fire, 0.3);
     CONTAINER DE PROJETOS
 ======================================== */
 .projects-container {
-  background: linear-gradient(180deg, $burgundy 0%, darken($burgundy, 5%) 100%);
+  background: linear-gradient(180deg, $burgundy 0%, color.adjust($burgundy, $lightness: -5%) 100%);
   position: relative;
   overflow: hidden;
 
@@ -105,7 +107,11 @@ $shadow-red: rgba($red-fire, 0.3);
     animation: fadeInUp 1s ease-out;
 
     .see-more-btn {
-      background: linear-gradient(135deg, $red-fire 0%, lighten($red-fire, 5%) 100%);
+      background: linear-gradient(
+        135deg,
+        $red-fire 0%,
+        color.adjust($red-fire, $lightness: 5%) 100%
+      );
       color: $primary-color;
       padding: 1.1rem 2.8rem;
       font-size: 1.1rem;
@@ -155,7 +161,11 @@ $shadow-red: rgba($red-fire, 0.3);
           0 15px 45px rgba($red-fire, 0.5),
           0 0 0 1px rgba($primary-color, 0.15),
           inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        background: linear-gradient(135deg, lighten($red-fire, 3%) 0%, $red-fire 100%);
+        background: linear-gradient(
+          135deg,
+          color.adjust($red-fire, $lightness: 3%) 0%,
+          $red-fire 100%
+        );
 
         &::before {
           left: 100%;

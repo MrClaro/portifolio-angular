@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $accent-color: #cc0000;
 $background-color: #38023b;
 $primary-color: #fafafa;
@@ -12,7 +14,11 @@ $text-muted: rgba($primary-color, 0.85);
     SEÇÃO PRINCIPAL
 ======================================== */
 .about-section {
-  background: linear-gradient(135deg, $black-absolute 0%, darken($black-absolute, 2%) 100%);
+  background: linear-gradient(
+    135deg,
+    $black-absolute 0%,
+    color.adjust($black-absolute, $lightness: -2%) 100%
+  );
   color: $primary-color;
   display: flex;
   align-items: center;
@@ -151,7 +157,7 @@ $text-muted: rgba($primary-color, 0.85);
       cursor: default;
 
       &:hover {
-        color: lighten($red-fire, 10%);
+        color: color.adjust($red-fire, $lightness: 10%);
         text-shadow: 0 0 25px rgba($red-fire, 0.5);
       }
     }
