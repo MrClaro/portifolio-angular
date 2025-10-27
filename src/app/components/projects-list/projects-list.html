@@ -1,0 +1,22 @@
+<div class="projects-container">
+  <section class="projects-section">
+    <div class="section-header">
+      <h1 class="section-title">Projetos em Destaque</h1>
+      <p class="section-subtitle">Confira alguns dos meus melhores trabalhos</p>
+    </div>
+
+    <div class="featured-projects-grid">
+      @for (project of featuredProjects; track project.repoName; let i = $index) {
+        <app-featured-project [project]="project" [index]="i"></app-featured-project>
+      }
+    </div>
+
+    <div class="section-footer">
+      <button mat-flat-button class="see-more-btn" (click)="navigateToAllProjects()">
+        <mat-icon>folder_open</mat-icon>
+        Ver Todos os Projetos
+        <mat-icon class="external-icon">open_in_new</mat-icon>
+      </button>
+    </div>
+  </section>
+</div>

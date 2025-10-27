@@ -1,0 +1,25 @@
+<article class="featured-project-row" [style.animation-delay]="getAnimationDelay()">
+  <div class="project-content">
+    <h2 class="content-title">{{ project.title }}</h2>
+    <p class="content-text">{{ project.content }}</p>
+    <div class="content-resources">
+      @for (resource of project.resources; track resource.url) {
+        <button mat-flat-button class="resource-btn" (click)="openUrl(resource.url)">
+          {{ resource.label }}
+        </button>
+      }
+    </div>
+  </div>
+  <div class="project-card">
+    <app-github-card
+      [repoName]="project.repoName"
+      [username]="project.username"
+      [description]="project.description"
+      [stars]="project.stars"
+      [language]="project.language"
+      [date]="project.date"
+      [githubUrl]="project.githubUrl"
+      [imageUrl]="project.imageUrl"
+    ></app-github-card>
+  </div>
+</article>

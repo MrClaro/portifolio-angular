@@ -1,0 +1,80 @@
+<div class="github-card-wrapper" (click)="openGithub()">
+  <div class="mockup-header">
+    <img
+      [src]="imageUrl || 'https://placehold.co/600x350/1a1a2e/ffffff?text=' + repoName"
+      [alt]="'Visualização do projeto ' + repoName"
+      class="project-mockup"
+      loading="lazy"
+    />
+
+    <div class="mockup-overlay"></div>
+
+    <div class="language-badge">
+      <i [class]="deviconClass"></i>
+      <span>{{ language }}</span>
+    </div>
+  </div>
+
+  <div class="repo-details">
+    <div class="repo-actions" (click)="$event.stopPropagation()">
+      <button
+        mat-icon-button
+        class="action-btn copy-btn"
+        title="Copiar URL"
+        (click)="copyToClipboard()"
+      >
+        <mat-icon>content_copy</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        class="action-btn star-btn"
+        [class.starred]="isStarred"
+        title="Favoritar"
+        (click)="toggleStar()"
+      >
+        <mat-icon>{{ isStarred ? 'star' : 'star_border' }}</mat-icon>
+      </button>
+
+      <button mat-icon-button class="action-btn share-btn" title="Compartilhar" (click)="share()">
+        <mat-icon>share</mat-icon>
+      </button>
+    </div>
+
+    <div class="repo-header">
+      <h3 class="repo-title">{{ repoName }}</h3>
+      <p class="repo-route">
+        <mat-icon class="route-icon">account_circle</mat-icon>
+        {{ username }}/{{ repoName }}
+      </p>
+    </div>
+
+    <p class="repo-description">
+      {{ description || 'Nenhuma descrição disponível para este projeto.' }}
+    </p>
+
+    <div class="metadata-row">
+      <span class="metadata-item stars-count">
+        <mat-icon>star</mat-icon>
+        <span>{{ stars }}</span>
+      </span>
+
+      <span class="metadata-item date-info">
+        <mat-icon>schedule</mat-icon>
+        <span>{{ date }}</span>
+      </span>
+    </div>
+
+    <button
+      mat-stroked-button
+      class="view-project-btn"
+      (click)="$event.stopPropagation(); openGithub()"
+    >
+      <mat-icon>code</mat-icon>
+      Ver no GitHub
+      <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+    </button>
+  </div>
+
+  <div class="card-shine"></div>
+</div>

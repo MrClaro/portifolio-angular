@@ -1,0 +1,230 @@
+$primary-color: #fafafa;
+$black-absolute: #0d0d0d;
+$red-fire: #cc0000;
+$charcoal-gray: #333333;
+$burgundy: #800000;
+
+$text-light: rgba($primary-color, 0.92);
+$shadow-red: rgba($red-fire, 0.3);
+
+/* ========================================
+    CONTAINER DE PROJETOS
+======================================== */
+.projects-container {
+  background: linear-gradient(180deg, $burgundy 0%, darken($burgundy, 5%) 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $red-fire, transparent);
+    opacity: 0.5;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 80%, rgba($red-fire, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba($red-fire, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+}
+
+/* ========================================
+    SEÇÃO DE PROJETOS
+======================================== */
+.projects-section {
+  padding: 5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    animation: fadeInDown 0.8s ease-out;
+
+    .section-title {
+      line-height: 1.2;
+      box-sizing: content-box;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, $primary-color 0%, $text-light 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      position: relative;
+      display: inline-block;
+      filter: drop-shadow(0 2px 20px rgba($red-fire, 0.3));
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, $red-fire, $primary-color, $red-fire);
+        border-radius: 2px;
+        box-shadow: 0 2px 10px rgba($red-fire, 0.5);
+      }
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: $text-light;
+      max-width: 600px;
+      margin: 2rem auto 0;
+      font-weight: 500;
+      line-height: 1.6;
+      text-shadow: 0 1px 3px rgba($black-absolute, 0.3);
+    }
+  }
+
+  .featured-projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-bottom: 5rem;
+  }
+
+  .section-footer {
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+
+    .see-more-btn {
+      background: linear-gradient(135deg, $red-fire 0%, lighten($red-fire, 5%) 100%);
+      color: $primary-color;
+      padding: 1.1rem 2.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 50px;
+      box-shadow:
+        0 10px 30px $shadow-red,
+        0 0 0 1px rgba($primary-color, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.3px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      mat-icon {
+        font-size: 1.3rem;
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+
+      .external-icon {
+        font-size: 1.1rem;
+        width: 1.1rem;
+        height: 1.1rem;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow:
+          0 15px 45px rgba($red-fire, 0.5),
+          0 0 0 1px rgba($primary-color, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        background: linear-gradient(135deg, lighten($red-fire, 3%) 0%, $red-fire 100%);
+
+        &::before {
+          left: 100%;
+        }
+
+        .external-icon {
+          transform: translate(4px, -4px);
+        }
+      }
+
+      &:active {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow:
+          0 8px 25px rgba($red-fire, 0.4),
+          0 0 0 1px rgba($primary-color, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}
+
+/* ========================================
+     ANIMAÇÕES
+======================================== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+     RESPONSIVIDADE
+======================================== */
+/* Mobile */
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 3rem 1rem;
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .featured-projects-grid {
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-footer {
+      .see-more-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 2rem;
+      }
+    }
+  }
+}

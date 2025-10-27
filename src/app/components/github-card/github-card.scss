@@ -1,0 +1,407 @@
+$primary-color: #fafafa;
+$black-absolute: #0d0d0d;
+$red-fire: #cc0000;
+$charcoal-gray: #333333;
+$burgundy: #800000;
+
+$text-secondary: #666666;
+$star-color: #ffd700;
+$border-light: rgba($charcoal-gray, 0.15);
+
+/* ========================================
+   CARD WRAPPER
+======================================== */
+.github-card-wrapper {
+  background: $primary-color;
+  border-radius: 20px;
+  box-shadow:
+    0 4px 6px -1px rgba($black-absolute, 0.1),
+    0 2px 4px -1px rgba($black-absolute, 0.06);
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid $border-light;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0 20px 25px -5px rgba($red-fire, 0.15),
+      0 10px 10px -5px rgba($burgundy, 0.1);
+    border-color: rgba($red-fire, 0.3);
+
+    .project-mockup {
+      transform: scale(1.08);
+    }
+
+    .mockup-overlay {
+      opacity: 0.7;
+    }
+
+    .card-shine {
+      opacity: 1;
+      animation: shine 2s ease-in-out infinite;
+    }
+
+    .language-badge {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba($red-fire, 0.3);
+    }
+
+    .repo-actions {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &:active {
+    transform: translateY(-4px);
+  }
+}
+
+/* ========================================
+   MOCKUP HEADER
+======================================== */
+.mockup-header {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, $black-absolute 0%, $charcoal-gray 100%);
+
+  .project-mockup {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.mockup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba($black-absolute, 0.3) 50%,
+    rgba($black-absolute, 0.8) 100%
+  );
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.language-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba($primary-color, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $black-absolute;
+  box-shadow: 0 4px 12px rgba($black-absolute, 0.15);
+  transition: all 0.3s ease;
+  z-index: 2;
+
+  i {
+    font-size: 1.25rem;
+    line-height: 1;
+    color: $red-fire;
+  }
+}
+/* ========================================
+   DETALHES DO REPOSITÓRIO
+======================================== */
+.repo-details {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.repo-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.3s ease;
+
+  .action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba($red-fire, 0.08);
+    color: $red-fire;
+    transition: all 0.3s ease;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      background: rgba($red-fire, 0.15);
+      transform: scale(1.1);
+    }
+
+    &.star-btn.starred {
+      background: rgba($star-color, 0.15);
+      color: $star-color;
+      animation: pulse 0.5s ease;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.repo-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.repo-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: $black-absolute;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.repo-route {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: $text-secondary;
+  margin: 0;
+  font-weight: 500;
+
+  .route-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: $red-fire;
+  }
+}
+
+.repo-description {
+  font-size: 0.938rem;
+  line-height: 1.6;
+  margin: 0;
+  color: $text-secondary;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ========================================
+   METADADOS
+======================================== */
+.metadata-row {
+  display: flex;
+  gap: 24px;
+  padding: 12px 0;
+  border-top: 1px solid $border-light;
+  border-bottom: 1px solid $border-light;
+
+  .metadata-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text-secondary;
+    transition: color 0.3s ease;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+    &.stars-count {
+      mat-icon {
+        color: $star-color;
+      }
+    }
+
+    &.date-info {
+      mat-icon {
+        color: $burgundy;
+      }
+    }
+  }
+}
+
+/* ========================================
+  BOTÃO DE AÇÃO
+======================================== */
+.view-project-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.938rem;
+  border: 2px solid $red-fire;
+  color: $red-fire;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($red-fire, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, $red-fire 0%, $burgundy 100%);
+    color: $primary-color;
+    border-color: $burgundy;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba($red-fire, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+
+    .arrow-icon {
+      transform: translateX(4px);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .arrow-icon {
+    transition: transform 0.3s ease;
+  }
+}
+
+/* ========================================
+   EFEITO DE BRILHO
+======================================== */
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba($primary-color, 0.1) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+/* Mobile */
+@media (max-width: 768px) {
+  .github-card-wrapper {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .mockup-header {
+    height: 180px;
+  }
+
+  .repo-details {
+    padding: 20px;
+    gap: 14px;
+  }
+
+  .repo-title {
+    font-size: 1.25rem;
+  }
+
+  .repo-description {
+    font-size: 0.875rem;
+  }
+
+  .metadata-row {
+    gap: 16px;
+  }
+
+  .view-project-btn {
+    height: 44px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .mockup-header {
+    height: 160px;
+  }
+
+  .language-badge {
+    padding: 6px 12px;
+    font-size: 0.813rem;
+
+    i {
+      font-size: 1.125rem;
+    }
+  }
+}

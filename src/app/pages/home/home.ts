@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { HeroSection } from '../../_components/hero-section/hero-section';
+import { HeroSection } from '../../components/hero-section/hero-section';
 
 @Component({
   selector: 'app-home',
