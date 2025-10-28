@@ -140,7 +140,6 @@ $shadow-soft: rgba($black-absolute, 0.08);
           0 2px 8px rgba($black-absolute, 0.04),
           inset 0 1px 0 rgba(255, 255, 255, 0.8);
 
-        // Efeito de brilho animado
         &::before {
           content: '';
           position: absolute;
@@ -152,7 +151,6 @@ $shadow-soft: rgba($black-absolute, 0.08);
           transition: left 0.6s ease;
         }
 
-        // Borda gradiente no hover
         &::after {
           content: '';
           position: absolute;
