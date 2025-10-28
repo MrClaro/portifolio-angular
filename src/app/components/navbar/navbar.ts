@@ -8,7 +8,7 @@ import { MatToolbar } from '@angular/material/toolbar';
   styleUrls: ['./navbar.scss'],
   imports: [MatToolbar, MatIcon],
 })
-export class NavbarComponent implements OnInit {
+export class Navbar implements OnInit {
   isNavbarVisible = true;
   isMenuOpen = false;
   isScrolled = false;
