@@ -30,7 +30,7 @@ export class ProjectsList implements OnInit {
           'O ReciclaTech é uma plataforma que visa promover a sustentabilidade e a economia circular, conectando pessoas que desejam doar eletrônicos usados em bom estado com aquelas que precisam adquirir esses itens. O projeto foi construído com foco em semântica, acessibilidade e responsividade, utilizando as melhores práticas do HTML5 e SCSS.',
         resourcesTitle: 'Links Úteis',
         resources: [
-          { label: 'Ver Demo', url: 'mrclaro.github.io/recicla-tech/' },
+          { label: 'Ver Demo', url: 'https://mrclaro.github.io/recicla-tech/' },
           { label: 'Documentação', url: 'https://github.com/MrClaro/recicla-tech' },
         ],
         technologies: ['HTML', 'SASS'],
