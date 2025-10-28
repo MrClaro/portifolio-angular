@@ -1,8 +1,12 @@
 $primary-color: #fafafa;
 $black-absolute: #0d0d0d;
 $red-fire: #cc0000;
-$charcoal-gray: #333333;
+$charcoal-gray: #333;
 $burgundy: #800000;
+
+$trans-smooth: all 0.3s ease;
+$trans-bounce: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+$trans-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 /* ========================================
    TOOLBAR PRINCIPAL
@@ -11,42 +15,38 @@ mat-toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  inset: 0 0 auto;
+  width: 100%;
+  min-height: 80px;
+  padding: 0;
+  z-index: 1000;
   background: rgba($black-absolute, 0.98);
   backdrop-filter: blur(20px);
   color: $primary-color;
   box-shadow: 0 2px 20px rgba($red-fire, 0.25);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 1000;
-  min-height: 80px;
-  padding: 0;
   box-sizing: border-box;
   transition:
     transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s ease,
-    background 0.3s ease;
+    box-shadow $trans-smooth,
+    background $trans-smooth;
   animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
   &::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: auto 0 0;
     height: 1px;
     background: linear-gradient(
       90deg,
-      transparent 0%,
+      transparent,
       rgba($red-fire, 0.3) 20%,
       rgba($red-fire, 0.5) 50%,
       rgba($red-fire, 0.3) 80%,
-      transparent 100%
+      transparent
     );
     opacity: 0.5;
-    transition: opacity 0.3s ease;
+    transition: opacity $trans-smooth;
   }
 
   &.navbar-hidden {
@@ -59,7 +59,7 @@ mat-toolbar {
   }
 
   &.scrolled {
-    background: rgba($black-absolute, 1);
+    background: $black-absolute;
     box-shadow: 0 4px 30px rgba($red-fire, 0.4);
     min-height: 72px;
 
@@ -103,22 +103,21 @@ mat-toolbar {
   display: flex;
   align-items: center;
   position: relative;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.4s $trans-bounce;
 
   &::after {
     content: '';
     position: absolute;
     inset: -8px;
     border-radius: 12px;
-    background: radial-gradient(circle at center, rgba($red-fire, 0.15), transparent 70%);
+    background: radial-gradient(circle, rgba($red-fire, 0.15), transparent 70%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity $trans-smooth;
     z-index: -1;
   }
 
   &:hover {
     transform: scale(1.08) translateY(-2px);
-
     &::after {
       opacity: 1;
     }
@@ -133,13 +132,10 @@ mat-toolbar {
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba($red-fire, 0.3));
-    transition: all 0.3s ease;
+    transition: $trans-smooth;
   }
 }
 
-/* ========================================
-   SPACERS
-======================================== */
 .left-spacer-manual,
 .right-spacer-manual {
   flex: 1;
@@ -147,7 +143,7 @@ mat-toolbar {
 }
 
 /* ========================================
-   NAVEGAÇÃO DESKTOP
+   NAVEGAÇÃO
 ======================================== */
 .main-links {
   display: flex;
@@ -160,21 +156,20 @@ mat-toolbar {
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1.5rem !important;
-    font-weight: 600;
-    font-size: 1rem;
+    font: 600 1rem/1 inherit;
     letter-spacing: 0.3px;
     color: $primary-color;
     border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     overflow: hidden;
     white-space: nowrap;
+    transition: $trans-standard;
 
     mat-icon {
       font-size: 20px;
       width: 20px;
       height: 20px;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform $trans-bounce;
     }
 
     &::before {
@@ -183,8 +178,8 @@ mat-toolbar {
       inset: 0;
       background: linear-gradient(135deg, rgba($red-fire, 0.15), rgba($burgundy, 0.15));
       opacity: 0;
-      transition: opacity 0.3s ease;
       border-radius: 12px;
+      transition: opacity $trans-smooth;
     }
 
     &::after {
@@ -197,18 +192,15 @@ mat-toolbar {
       background: linear-gradient(90deg, $red-fire, $burgundy);
       border-radius: 2px;
       transform: translateX(-50%);
-      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 2px 8px rgba($red-fire, 0.5);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &:hover {
       transform: translateY(-2px);
-      color: $primary-color;
-
       &::before {
         opacity: 1;
       }
-
       mat-icon {
         transform: scale(1.15) rotate(5deg);
       }
@@ -220,12 +212,9 @@ mat-toolbar {
 
     &.active {
       background: rgba($red-fire, 0.15);
-      color: $primary-color;
-
       &::after {
         width: 60%;
       }
-
       mat-icon {
         color: $red-fire;
       }
@@ -257,7 +246,7 @@ mat-toolbar {
   box-shadow:
     0 4px 12px rgba($black-absolute, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: $trans-smooth;
 
   &:hover {
     background: linear-gradient(135deg, rgba($red-fire, 0.2), rgba($burgundy, 0.2));
@@ -277,9 +266,9 @@ mat-toolbar {
     font-size: 0.95rem !important;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     position: relative;
     overflow: hidden;
+    transition: $trans-bounce !important;
 
     &::before {
       content: '';
@@ -287,7 +276,7 @@ mat-toolbar {
       inset: 0;
       background: linear-gradient(135deg, $red-fire, $burgundy);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity $trans-smooth;
     }
 
     span {
@@ -302,7 +291,6 @@ mat-toolbar {
       &:hover {
         color: $primary-color !important;
         transform: scale(1.1);
-
         &::before {
           opacity: 0.15;
         }
@@ -333,19 +321,19 @@ mat-toolbar {
 .separator {
   width: 1px;
   height: 24px;
+  margin: 0 4px;
   background: linear-gradient(
     to bottom,
-    transparent 0%,
+    transparent,
     rgba($primary-color, 0.3) 15%,
     rgba($primary-color, 0.6) 50%,
     rgba($primary-color, 0.3) 85%,
-    transparent 100%
+    transparent
   );
-  margin: 0 4px;
 }
 
 /* ========================================
-   MENU HAMBURGER (MOBILE)
+   MENU HAMBURGER
 ======================================== */
 .hamburger-menu {
   display: none;
@@ -356,7 +344,7 @@ mat-toolbar {
   background: rgba($red-fire, 0.1);
   border: 1px solid rgba($red-fire, 0.2);
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: $trans-smooth;
 
   &:hover {
     background: rgba($red-fire, 0.2);
@@ -382,11 +370,9 @@ mat-toolbar {
   &:nth-child(1) {
     top: 14px;
   }
-
   &:nth-child(2) {
     top: 22.5px;
   }
-
   &:nth-child(3) {
     top: 31px;
   }
@@ -403,12 +389,10 @@ mat-toolbar {
       top: 22.5px;
       transform: rotate(45deg);
     }
-
     &:nth-child(2) {
       opacity: 0;
       transform: scaleX(0);
     }
-
     &:nth-child(3) {
       top: 22.5px;
       transform: rotate(-45deg);
@@ -421,10 +405,7 @@ mat-toolbar {
 ======================================== */
 .mobile-menu-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: rgba($black-absolute, 0.85);
   backdrop-filter: blur(8px);
   z-index: 999;
@@ -451,31 +432,24 @@ mat-toolbar {
   max-width: 85vw;
   height: 100vh;
   padding: 6rem 0 2rem;
-  background: linear-gradient(
-    180deg,
-    rgba($charcoal-gray, 0.98) 0%,
-    rgba($black-absolute, 0.98) 100%
-  );
+  background: linear-gradient(180deg, rgba($charcoal-gray, 0.98), rgba($black-absolute, 0.98));
   backdrop-filter: blur(20px);
   box-shadow:
     -8px 0 40px rgba($black-absolute, 0.6),
     inset 1px 0 0 rgba($red-fire, 0.1);
   transform: translateX(100%);
   opacity: 0;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   overflow-y: auto;
   box-sizing: border-box;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
+    inset: 0;
     background:
-      radial-gradient(circle at 50% 0%, rgba($red-fire, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 50% 100%, rgba($burgundy, 0.08) 0%, transparent 50%);
+      radial-gradient(circle at 50% 0%, rgba($red-fire, 0.08), transparent 50%),
+      radial-gradient(circle at 50% 100%, rgba($burgundy, 0.08), transparent 50%);
     pointer-events: none;
   }
 
@@ -487,30 +461,27 @@ mat-toolbar {
     padding: 1.25rem 2rem !important;
     color: $primary-color !important;
     text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font: 600 1.1rem/1 inherit;
     letter-spacing: 0.3px;
     border-left: 4px solid transparent;
     position: relative;
-    transition: all 0.3s ease;
+    transition: $trans-smooth;
 
     mat-icon {
       color: rgba($primary-color, 0.7);
       font-size: 24px;
       width: 24px;
       height: 24px;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: $trans-bounce;
     }
 
     &::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
+      inset: 0 auto 0 0;
       width: 0;
       background: linear-gradient(90deg, rgba($red-fire, 0.15), transparent);
-      transition: width 0.3s ease;
+      transition: width $trans-smooth;
     }
 
     &:hover {
@@ -521,7 +492,6 @@ mat-toolbar {
       &::before {
         width: 100%;
       }
-
       mat-icon {
         color: $red-fire;
         transform: scale(1.2) rotate(5deg);
@@ -531,7 +501,6 @@ mat-toolbar {
     &.active {
       background: linear-gradient(90deg, rgba($red-fire, 0.2), rgba($red-fire, 0.05));
       border-left-color: $red-fire;
-      color: $primary-color !important;
 
       mat-icon {
         color: $red-fire;
@@ -548,123 +517,99 @@ mat-toolbar {
 /* ========================================
    RESPONSIVIDADE
 ======================================== */
-/* Large Desktop */
 @media (min-width: 1600px) {
   .navbar-container {
     padding: 0 4rem;
   }
-
   .main-links a {
     padding: 0.875rem 1.75rem !important;
     font-size: 1.05rem;
   }
 }
 
-/* Desktop */
 @media (max-width: 1400px) {
   .navbar-container {
     padding: 0 2.5rem;
     gap: 1.5rem;
   }
-
   .main-links a {
     padding: 0.7rem 1.3rem !important;
     font-size: 0.95rem;
   }
 }
 
-/* Tablet Large */
 @media (max-width: 1024px) {
   .navbar-container {
     padding: 0 2rem;
     gap: 1rem;
   }
-
   .main-links a {
     padding: 0.65rem 1.2rem !important;
     font-size: 0.9rem;
     gap: 0.6rem;
-
     mat-icon {
       font-size: 18px;
       width: 18px;
       height: 18px;
     }
   }
-
   .left-spacer-manual,
   .right-spacer-manual {
     min-width: 1rem;
   }
 }
 
-/* Tablet */
 @media (max-width: 900px) {
   mat-toolbar {
     min-height: 72px;
-
     &.scrolled {
       min-height: 68px;
-
       .logo img {
         height: 64px;
       }
     }
   }
-
   .navbar-container {
     padding: 0 1.5rem;
   }
-
   .logo img {
     height: 70px;
   }
-
   .main-links a {
     padding: 0.6rem 1rem !important;
     font-size: 0.875rem;
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   mat-toolbar {
     min-height: 68px;
-
     &.scrolled {
       min-height: 64px;
-
       .logo img {
         height: 56px;
       }
     }
   }
-
   .navbar-container {
     padding: 0 1.25rem;
     gap: 0.75rem;
   }
-
   .logo img {
     height: 64px;
   }
-
   .main-links-left a,
   .main-links-right-group > a {
     display: none !important;
   }
-
   .hamburger-menu {
     display: flex !important;
   }
-
   .main-links-right-group {
     gap: 1rem;
   }
-
   .lang-selector {
     padding: 5px;
-
     button {
       min-width: 44px !important;
       height: 36px !important;
@@ -672,73 +617,56 @@ mat-toolbar {
       font-size: 0.85rem !important;
     }
   }
-
   .separator {
     height: 20px;
   }
-
   .left-spacer-manual,
   .right-spacer-manual {
     min-width: 0.5rem;
   }
 }
 
-/* Mobile Small */
 @media (max-width: 480px) {
   mat-toolbar {
     min-height: 64px;
-
     &.scrolled {
       min-height: 60px;
-
       .logo img {
         height: 50px;
       }
     }
   }
-
   .navbar-container {
     padding: 0 1rem;
     gap: 0.5rem;
   }
-
   .logo img {
     height: 56px;
   }
-
   .hamburger-menu {
     width: 44px !important;
     height: 44px !important;
     padding: 10px !important;
   }
-
   .hamburger-line {
     width: 22px;
     left: 11px;
-
     &:nth-child(1) {
       top: 13px;
     }
-
     &:nth-child(2) {
       top: 21px;
     }
-
     &:nth-child(3) {
       top: 29px;
     }
   }
-
-  .hamburger-menu.active .hamburger-line {
-    &:nth-child(1),
-    &:nth-child(3) {
-      top: 21px;
-    }
+  .hamburger-menu.active .hamburger-line:nth-child(1),
+  .hamburger-menu.active .hamburger-line:nth-child(3) {
+    top: 21px;
   }
-
   .lang-selector {
     padding: 4px;
-
     button {
       min-width: 40px !important;
       height: 34px !important;
@@ -746,47 +674,38 @@ mat-toolbar {
       font-size: 0.8rem !important;
     }
   }
-
   .separator {
     height: 18px;
   }
-
   .mobile-menu {
     width: 100%;
     max-width: 100vw;
     padding: 5rem 0 1.5rem;
-
     a {
       padding: 1.1rem 1.5rem !important;
       font-size: 1rem;
-
       &:hover {
         padding-left: 2rem !important;
       }
     }
   }
-
   .left-spacer-manual,
   .right-spacer-manual {
     display: none;
   }
 }
 
-/* Mobile Extra Small */
 @media (max-width: 360px) {
   .navbar-container {
     padding: 0 0.75rem;
   }
-
   .logo img {
     height: 52px;
   }
-
   .hamburger-menu {
     width: 40px !important;
     height: 40px !important;
   }
-
   .lang-selector button {
     min-width: 36px !important;
     height: 32px !important;
@@ -795,7 +714,6 @@ mat-toolbar {
   }
 }
 
-/* Scroll Behavior */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
