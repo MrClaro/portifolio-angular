@@ -1,0 +1,53 @@
+<section id="expertise" class="expertise-section">
+  <div class="expertise-container">
+    <div class="expertise-header">
+      <h2 class="section-title">Áreas de Expertise</h2>
+      <p class="section-subtitle">
+        Serviços especializados para transformar suas ideias em soluções digitais de alta qualidade
+      </p>
+    </div>
+
+    <div class="expertise-grid">
+      @for (item of expertiseItems; track item.title; let i = $index) {
+        <article
+          class="expertise-card"
+          [class.highlighted]="item.highlighted"
+          [style.animation-delay]="getAnimationDelay(i)"
+        >
+          <div class="card-icon-wrapper">
+            <mat-icon class="card-icon">{{ item.icon }}</mat-icon>
+          </div>
+
+          <div class="card-content">
+            <h3 class="card-title">{{ item.title }}</h3>
+            <p class="card-description">{{ item.description }}</p>
+
+            <div class="card-skills">
+              @for (skill of item.skills; track skill) {
+                <span class="skill-tag">{{ skill }}</span>
+              }
+            </div>
+          </div>
+
+          @if (item.highlighted) {
+            <div class="highlight-badge">
+              <mat-icon>star</mat-icon>
+              <span>Destaque</span>
+            </div>
+          }
+        </article>
+      }
+    </div>
+
+    <div class="expertise-cta">
+      <h3 class="cta-title">Pronto para começar seu projeto?</h3>
+      <p class="cta-text">
+        Vamos conversar sobre como posso ajudar a transformar sua visão em realidade
+      </p>
+      <button mat-flat-button class="cta-button" (click)="sendEmail()">
+        <mat-icon>email</mat-icon>
+        Entre em Contato
+      </button>
+    </div>
+  </div>
+</section>
