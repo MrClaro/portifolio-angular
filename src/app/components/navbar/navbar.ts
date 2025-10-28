@@ -1,58 +1,44 @@
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatToolbarModule, MatIcon],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss',
+  styleUrls: ['./navbar.scss'],
+  imports: [MatToolbar, MatIcon],
 })
-export class Navbar implements OnDestroy {
-  isMenuOpen = false;
+export class NavbarComponent implements OnInit {
   isNavbarVisible = true;
+  isMenuOpen = false;
+  isScrolled = false;
+  currentLang = 'pt';
   private lastScrollTop = 0;
-  private scrollThreshold = 10;
-  private ticking = false;
+  private scrollThreshold = 50;
+
+  ngOnInit(): void {
+    this.currentLang = localStorage.getItem('language') || 'pt';
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    if (!this.ticking) {
-      window.requestAnimationFrame(() => {
-        this.handleScroll();
-        this.ticking = false;
-      });
-      this.ticking = true;
-    }
-  }
-
-  private handleScroll(): void {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (currentScroll <= 0) {
-      this.isNavbarVisible = true;
-      this.lastScrollTop = currentScroll;
-      return;
-    }
+    this.isScrolled = currentScroll > 20;
 
-    if (Math.abs(currentScroll - this.lastScrollTop) < this.scrollThreshold) {
-      return;
-    }
-
-    if (currentScroll > this.lastScrollTop && currentScroll > 80) {
+    if (currentScroll > this.lastScrollTop && currentScroll > this.scrollThreshold) {
       this.isNavbarVisible = false;
-      if (this.isMenuOpen) {
-        this.closeMenu();
-      }
+      this.closeMenu();
     } else {
       this.isNavbarVisible = true;
     }
 
-    this.lastScrollTop = currentScroll;
+    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+
     if (this.isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -65,7 +51,13 @@ export class Navbar implements OnDestroy {
     document.body.style.overflow = '';
   }
 
-  ngOnDestroy(): void {
-    document.body.style.overflow = '';
+  changeLanguage(lang: 'pt' | 'en'): void {
+    this.currentLang = lang;
+    localStorage.setItem('language', lang);
+
+    //TODO: Implementar lógica de tradução
+    // Exemplo: this.translateService.use(lang);
+
+    console.log(`Idioma alterado para: ${lang}`);
   }
 }
