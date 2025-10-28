@@ -324,7 +324,7 @@ app-skills-marquee {
 /* ========================================
      RESPONSIVIDADE
 ======================================== */
-/* Desktop pequeno */
+/* Small Desktop */
 @media (max-width: 1248px) {
   .container {
     transform: translate(-50%, -55%);
@@ -398,7 +398,7 @@ app-skills-marquee {
   }
 }
 
-/* Mobile pequeno */
+/* Small Mobile */
 @media (max-width: 480px) {
   .hero-section {
     height: calc(100vh - 56px);
