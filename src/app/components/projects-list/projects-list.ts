@@ -39,7 +39,7 @@ export class ProjectsList implements OnInit {
         description:
           'Plataforma de conexão para economia circular e sustentabilidade, focada na doação e aquisição de eletrônicos usados.',
         stars: 0,
-        language: 'SCSS',
+        language: 'SASS',
         date: '2025-10-15',
         githubUrl: 'https://github.com/MrClaro/recicla-tech/',
         imageUrl: '/recicla-tech.png',
