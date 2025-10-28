@@ -1,0 +1,147 @@
+<section id="contact" class="contact-section">
+  <div class="contact-container">
+    <div class="contact-header">
+      <h2 class="section-title">Vamos Conversar?</h2>
+      <p class="section-subtitle">
+        Estou sempre aberto a novas oportunidades e projetos interessantes. Entre em contato!
+      </p>
+    </div>
+
+    <div class="contact-content">
+      <div class="contact-info-wrapper">
+        <div class="info-header">
+          <h3 class="info-title">Informações de Contato</h3>
+          <p class="info-subtitle">Escolha a melhor forma de me encontrar</p>
+        </div>
+
+        <div class="contact-info-grid">
+          @for (info of contactInfo; track info.title; let i = $index) {
+            <div class="info-card" [style.animation-delay]="getAnimationDelay(i)">
+              <div class="info-icon-wrapper">
+                <mat-icon class="info-icon">{{ info.icon }}</mat-icon>
+              </div>
+              <div class="info-content">
+                <h4 class="info-label">{{ info.title }}</h4>
+                @if (info.link) {
+                  <a [href]="info.link" class="info-value clickable">{{ info.value }}</a>
+                } @else {
+                  <p class="info-value">{{ info.value }}</p>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="social-links">
+          <h4 class="social-title">Redes Sociais</h4>
+          <div class="social-grid">
+            @for (social of socialLinks; track social.name; let i = $index) {
+              <button
+                class="social-btn"
+                [style.animation-delay]="getAnimationDelay(i + 3)"
+                (click)="openLink(social.url)"
+                [attr.aria-label]="social.name"
+              >
+                <i [class]="social.icon"></i>
+                <span>{{ social.name }}</span>
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="resume-download" style="animation-delay: 0.6s">
+          <button mat-flat-button class="download-btn" (click)="downloadResume()">
+            <mat-icon>download</mat-icon>
+            <span>Baixar Currículo</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <div class="form-header">
+          <h3 class="form-title">Envie uma Mensagem</h3>
+          <p class="form-subtitle">Preencha o formulário e retornarei o mais breve possível</p>
+        </div>
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Nome Completo</mat-label>
+            <input matInput formControlName="name" placeholder="Digite seu nome completo" />
+            <mat-icon matPrefix>person</mat-icon>
+            @if (
+              contactForm.get('name')?.hasError('required') && contactForm.get('name')?.touched
+            ) {
+              <mat-error>Nome é obrigatório</mat-error>
+            }
+            @if (contactForm.get('name')?.hasError('minlength')) {
+              <mat-error>Nome deve ter pelo menos 3 caracteres</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              formControlName="email"
+              type="email"
+              placeholder="seu.email@example.com"
+            />
+            <mat-icon matPrefix>email</mat-icon>
+            @if (
+              contactForm.get('email')?.hasError('required') && contactForm.get('email')?.touched
+            ) {
+              <mat-error>Email é obrigatório</mat-error>
+            }
+            @if (contactForm.get('email')?.hasError('email')) {
+              <mat-error>Email inválido</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Assunto</mat-label>
+            <input matInput formControlName="subject" placeholder="Sobre o que deseja falar?" />
+            <mat-icon matPrefix>subject</mat-icon>
+            @if (
+              contactForm.get('subject')?.hasError('required') &&
+              contactForm.get('subject')?.touched
+            ) {
+              <mat-error>Assunto é obrigatório</mat-error>
+            }
+            @if (contactForm.get('subject')?.hasError('minlength')) {
+              <mat-error>Assunto deve ter pelo menos 5 caracteres</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field textarea-field">
+            <mat-label>Mensagem</mat-label>
+            <textarea
+              matInput
+              formControlName="message"
+              rows="6"
+              placeholder="Digite sua mensagem aqui..."
+            ></textarea>
+            @if (
+              contactForm.get('message')?.hasError('required') &&
+              contactForm.get('message')?.touched
+            ) {
+              <mat-error>Mensagem é obrigatória</mat-error>
+            }
+            @if (contactForm.get('message')?.hasError('minlength')) {
+              <mat-error>Mensagem deve ter pelo menos 10 caracteres</mat-error>
+            }
+          </mat-form-field>
+
+          <button mat-flat-button type="submit" class="submit-btn" [disabled]="isSubmitting">
+            @if (isSubmitting) {
+              <mat-icon class="spinner">hourglass_empty</mat-icon>
+              <span>Enviando...</span>
+            } @else {
+              <mat-icon>send</mat-icon>
+              <span>Enviar Mensagem</span>
+            }
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
