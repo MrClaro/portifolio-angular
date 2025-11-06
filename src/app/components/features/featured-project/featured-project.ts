@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { GitHubCard } from '../github-card/github-card';
-import { FeaturedProjectI } from '../../interfaces/FeaturedProjectI';
+import { IFeaturedProject } from '../../../interfaces/featured-project';
 
 @Component({
   selector: 'app-featured-project',
@@ -14,7 +14,7 @@ import { FeaturedProjectI } from '../../interfaces/FeaturedProjectI';
   styleUrls: ['./featured-project.scss'],
 })
 export class FeaturedProject {
-  @Input() project!: FeaturedProjectI;
+  @Input() project!: IFeaturedProject;
   @Input() index: number = 0;
 
   constructor(private router: Router) {}

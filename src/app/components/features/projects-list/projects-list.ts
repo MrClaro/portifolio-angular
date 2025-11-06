@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { FeaturedProject } from '../featured-project/featured-project';
-import { FeaturedProjectI } from '../../interfaces/FeaturedProjectI';
+import { IFeaturedProject } from '../../../interfaces/featured-project';
 
 @Component({
   selector: 'app-projects-list',
@@ -14,7 +14,7 @@ import { FeaturedProjectI } from '../../interfaces/FeaturedProjectI';
   styleUrls: ['./projects-list.scss'],
 })
 export class ProjectsList implements OnInit {
-  featuredProjects: FeaturedProjectI[] = [];
+  featuredProjects: IFeaturedProject[] = [];
 
   constructor(private router: Router) {}
 

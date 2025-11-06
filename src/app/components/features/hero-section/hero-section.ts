@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { NgxTypedJsModule } from 'ngx-typed-js';
-import { TypewriterDirective } from '../../directives/typewriter';
 import { SkillsMarquee } from '../skills-marquee/skills-marquee';
+import { TypewriterDirective } from '../../../directives/typewriter';
 
 @Component({
   selector: 'app-hero-section',

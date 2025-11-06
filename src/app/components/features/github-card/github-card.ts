@@ -40,7 +40,7 @@ export class GitHubCard implements OnInit {
       css: 'devicon-css3-plain colored',
       react: 'devicon-react-original colored',
       angular: 'devicon-angularjs-plain colored',
-      sass: 'devicon-sass-original colored',
+      scss: 'devicon-sass-original colored',
       vue: 'devicon-vuejs-plain colored',
       node: 'devicon-nodejs-plain colored',
       php: 'devicon-php-plain colored',
