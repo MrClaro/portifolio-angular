@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, of, BehaviorSubject } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { NGXLogger } from 'ngx-logger';
 
 export interface GitHubProject {
   repoName: string;
@@ -40,7 +41,10 @@ export class GithubService {
   private allProjectsCache$ = new BehaviorSubject<GitHubProject[]>([]);
   public allProjects$ = this.allProjectsCache$.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private logger: NGXLogger,
+  ) {}
 
   /**
    * Busca APENAS os 3 projetos em destaque (featured)
@@ -59,7 +63,7 @@ export class GithubService {
           ),
         })),
         catchError((error) => {
-          console.warn(`⚠️ Repo em destaque não encontrado: ${pr.username}/${pr.repo}`, error);
+          this.logger.warn(`⚠️ Repo em destaque não encontrado: ${pr.username}/${pr.repo}`, error);
           return of(null);
         }),
       ),
@@ -70,21 +74,21 @@ export class GithubService {
         const validRepos = repos.filter((repo) => repo !== null) as GitHubProject[];
         return validRepos.sort((a, b) => (a.priorityIndex || 0) - (b.priorityIndex || 0));
       }),
-      tap((projects) => console.log('✨ Projetos em destaque carregados:', projects.length)),
+      tap((projects) => this.logger.info('✨ Projetos em destaque carregados:', projects.length)),
       catchError((error) => {
-        console.error('❌ Erro ao buscar projetos em destaque:', error);
+        this.logger.error('❌ Erro ao buscar projetos em destaque:', error);
         return of([]);
       }),
     );
   }
 
   /**
-   * Busca TODOS os projetos (para a página de listagem completa)
+   * Busca TODOS os projetos
    */
   getAllProjects(): Observable<GitHubProject[]> {
     // Se já tem cache, retorna
     if (this.allProjectsCache$.value.length > 0) {
-      console.log('📦 Usando cache de projetos');
+      this.logger.info('📦 Usando cache de projetos');
       return of(this.allProjectsCache$.value);
     }
 
@@ -99,7 +103,7 @@ export class GithubService {
           ),
         })),
         catchError((error) => {
-          console.warn(`⚠️ Repo prioritário não encontrado: ${pr.username}/${pr.repo}`, error);
+          this.logger.warn(`⚠️ Repo prioritário não encontrado: ${pr.username}/${pr.repo}`, error);
           return of(null);
         }),
       ),
@@ -108,7 +112,7 @@ export class GithubService {
     // 2. Busca outros repos dos usuários
     const otherReposRequests = this.priorityUsers.map((username) =>
       this.getRepositoriesFromUser(username, 50),
-    ); // Busca mais repos
+    );
 
     // 3. Combina todas as requisições
     return forkJoin([forkJoin(priorityRequests), forkJoin(otherReposRequests)]).pipe(
@@ -139,9 +143,9 @@ export class GithubService {
         // Combina: prioritários primeiro, depois outros
         const allRepos = [...sortedPriorityRepos, ...sortedOtherRepos];
 
-        console.log('✅ Total de projetos carregados:', allRepos.length);
-        console.log('🎯 Repos prioritários:', sortedPriorityRepos.length);
-        console.log('📦 Outros repos:', sortedOtherRepos.length);
+        this.logger.info('✅ Total de projetos carregados:', allRepos.length);
+        this.logger.info('🎯 Repos prioritários:', sortedPriorityRepos.length);
+        this.logger.info('📦 Outros repos:', sortedOtherRepos.length);
 
         // Atualiza cache
         this.allProjectsCache$.next(allRepos);
@@ -149,7 +153,7 @@ export class GithubService {
         return allRepos;
       }),
       catchError((error) => {
-        console.error('❌ Erro ao buscar todos os projetos:', error);
+        this.logger.error('❌ Erro ao buscar todos os projetos:', error);
         return of([]);
       }),
     );
@@ -215,7 +219,7 @@ export class GithubService {
    */
   clearCache(): void {
     this.allProjectsCache$.next([]);
-    console.log('🗑️ Cache de projetos limpo');
+    this.logger.info('🗑️ Cache de projetos limpo');
   }
 
   /**
@@ -244,7 +248,7 @@ export class GithubService {
         })),
       ),
       catchError((error) => {
-        console.error(`❌ Erro ao buscar repos de ${username}:`, error);
+        this.logger.error(`❌ Erro ao buscar repos de ${username}:`, error);
         return of([]);
       }),
     );
@@ -305,6 +309,7 @@ export class GithubService {
       TypeScript: '007ACC',
       Python: '3776AB',
       Java: 'ED8B00',
+      SCSS: 'F7B2BC',
       HTML: 'E34F26',
       CSS: '1572B6',
       Vue: '4FC08D',
