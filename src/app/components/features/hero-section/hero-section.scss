@@ -8,6 +8,7 @@ $burgundy: #800000;
    HERO SECTION
 ======================================== */
 .hero-section {
+  margin-top: 3rem;
   background: linear-gradient(to top, $black-absolute 0%, $burgundy 50%, $red-fire 100%);
   color: $primary-color;
   height: calc(100vh - 64px);
