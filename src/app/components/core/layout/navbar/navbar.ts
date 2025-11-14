@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [MatToolbar, MatIcon, RouterLink, RouterLinkActive],
 })
 export class Navbar implements OnInit {
+  constructor(private logger: NGXLogger) {}
+
   isNavbarVisible = true;
   isMenuOpen = false;
   isScrolled = false;
@@ -58,7 +61,6 @@ export class Navbar implements OnInit {
 
     //TODO: Implementar lógica de tradução
     // Exemplo: this.translateService.use(lang);
-
-    console.log(`Idioma alterado para: ${lang}`);
+    this.logger.info(`Idioma alterado para: ${lang}`);
   }
 }
