@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { NGXLogger } from 'ngx-logger';
 
 interface ContactInfo {
   icon: string;
@@ -82,6 +83,7 @@ export class Contact {
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
+    private logger: NGXLogger,
   ) {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -97,7 +99,7 @@ export class Contact {
 
       //TODO: Implementar lógica real de envio de email
       setTimeout(() => {
-        console.log('Formulário enviado:', this.contactForm.value);
+        this.logger.info('Formulário de contato enviado com sucesso.', this.contactForm.value);
 
         this.snackBar.open('Mensagem enviada com sucesso! Retornarei em breve.', 'Fechar', {
           duration: 5000,
