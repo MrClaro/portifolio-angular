@@ -117,15 +117,29 @@
           <h2 class="section-title" style="margin-top: 3rem">Certificações</h2>
           <div class="cards-grid">
             @for (cert of certifications; track cert.credentialId || cert.name) {
-              <div class="certification-card">
-                <div class="card-icon">🏆</div>
-                <h3 class="card-title">{{ cert.name }}</h3>
-                <p class="card-subtitle">{{ cert.issuer }}</p>
-                <p class="card-period">{{ cert.date }}</p>
-                @if (cert.credentialId) {
-                  <p class="credential-id">ID: {{ cert.credentialId }}</p>
-                }
-              </div>
+              <a
+                [href]="cert.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="certification-card-link"
+              >
+                <div class="certification-card">
+                  <div class="card-icon">🏆</div>
+                  <h3 class="card-title">{{ cert.name }}</h3>
+                  <p class="card-subtitle">{{ cert.issuer }}</p>
+                  <p class="card-period">{{ cert.date }}</p>
+                  @if (cert.credentialId) {
+                    <div class="credential-id-container">
+                      <span class="credential-label">ID:</span>
+                      <p class="credential-id">{{ cert.credentialId }}</p>
+                    </div>
+                  }
+                  <div class="view-badge">
+                    <span>Ver certificado</span>
+                    <i class="arrow">→</i>
+                  </div>
+                </div>
+              </a>
             }
           </div>
         </div>
