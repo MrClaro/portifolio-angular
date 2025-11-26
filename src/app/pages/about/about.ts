@@ -22,6 +22,7 @@ interface Certification {
   issuer: string;
   date: string;
   credentialId?: string;
+  link?: string;
 }
 
 interface Course {
@@ -71,7 +72,7 @@ export class About {
 
   experiences: Experience[] = [
     {
-      title: 'Estágiario Desenvolvedor Full Stack',
+      title: 'Estágiario TI',
       company: 'Mervil Transportes',
       period: 'Fev 2025 - Mai 2025',
       description:
@@ -80,7 +81,7 @@ export class About {
       // current: false,
     },
     {
-      title: 'Desenvolvedor Back End Junior',
+      title: 'Desenvolvedor Back End',
       company: 'Assert Tech',
       period: 'Ago 2024 - Nov 2025',
       description:
@@ -108,10 +109,11 @@ export class About {
 
   certifications: Certification[] = [
     {
-      name: 'Em Progresso: OCI Associate',
-      issuer: 'Em Progresso',
+      name: 'Oracle Cloud Infrastructure 2025 Certified Foundations Associate',
+      issuer: 'Oracle',
       date: 'Nov 2025',
-      credentialId: 'Em Progresso',
+      credentialId: '23A582F666615D8DE8EFED3E7EBC3CF904B055D529F074714D25ADA4534FBE44',
+      link: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=23A582F666615D8DE8EFED3E7EBC3CF904B055D529F074714D25ADA4534FBE44',
     },
   ];
 
