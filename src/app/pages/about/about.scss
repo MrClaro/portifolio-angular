@@ -430,14 +430,87 @@ $shadow-soft: rgba($black-absolute, 0.08);
     margin: 0;
   }
 
-  .credential-id {
-    font-size: 0.85rem;
-    color: $text-secondary;
-    font-family: 'Courier New', monospace;
-    margin-top: 0.5rem;
-    padding: 0.5rem;
+  .credential-id-container {
+    margin-top: 1rem;
+    padding: 0.75rem;
     background: rgba($charcoal-gray, 0.05);
-    border-radius: 4px;
+    border-radius: 8px;
+    border: 1px solid $border-subtle;
+
+    .credential-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: $text-secondary;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .credential-id {
+      font-size: 0.75rem;
+      color: $charcoal-gray;
+      font-family: 'Courier New', monospace;
+      word-break: break-all;
+      line-height: 1.5;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+  }
+}
+
+.certification-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  &:hover {
+    .certification-card {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 32px rgba($red-fire, 0.25);
+
+      .view-badge {
+        background: linear-gradient(135deg, $red-fire, $burgundy);
+        color: white;
+
+        .arrow {
+          transform: translateX(4px);
+        }
+      }
+
+      .card-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+  }
+
+  .certification-card {
+    cursor: pointer;
+
+    .view-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba($red-fire, 0.1);
+      color: $red-fire;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      @include transition-smooth;
+
+      .arrow {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    .card-icon {
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
   }
 }
 
